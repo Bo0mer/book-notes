@@ -83,7 +83,7 @@ by Andrew S. Tanenbaum, Maarten van Steen. If you like this notes, you can
   * Performance - e.g. for clients that are far away.
 * Leads to consistency problems - how to keep data across replicas consistent? There are several consistency models.
 * Data-centric consistency models - a contract between the software (processes) and memory implementation (data store). This model guarantees that if the software follows certain rules, the memory works correctly.
-  * Continuous consistency - using conits, define some continuous measurement for the deviation between replicas and some rules that tell the nodes when to update based on that metric.
+  * Continuous consistency - models that bound staleness deviations and/or numerical deviations. E.g. using conits, define some continuous measurement for the deviation between replicas and some rules that tell the nodes when to update based on that metric.
   * Consistent Ordering of Operations - models that deal with the order of operations on shared replicated data in order to provide consistency. In this models, all replicas must agree on a consistent global ordering of updates.
     * Sequential consistency - The result of any execution is the same as if the (read and write) operations by all processes on the data store were executed in some sequential order and the operations of each individual process appear in this sequence in the order specified by its program.
     * Causal consistency - Writes that are potentially causally related must be seen by all processes in the same order. Concurrent writes may be seen in a different order on different machines.
@@ -96,3 +96,22 @@ consistency provides guarantees for a single client concerning the consistency o
   * Read your writes consistency - The effect of a write operation by a process on data item _x_ will always be seen by a successive read operation on _x_ by the same process.
   * Writes follow reads consistency - A write operation by a process on a data item _x_ following a previous read operation on _x_ by the same process is guaranteed to take place on the same or a more recent value of _x_ that was read.
 * Replica management
+  * Replica-server placement
+  * Replication content placement - three different types of replicas - permanent replicas, server-initiated replicas, and client-initiated replicas
+    * Permanent replicas - the initial set of replicas, often small in number
+    * Server-initiated replicas - exist to enhance performance and/or reliability. They are created at the initiative of the data store.
+    * Client-initiated replicas (or client caches) - local storage facility that is used to temporary store a copy of the data fetched from a server.
+  * Content distribution - managing propagation of updated content.
+    * State vs Operations - whether to propagate only the state or the update operations itself. There are three main concepts:
+      1. Propagate only a notification of update (invalidation protocol)
+      1. Propagate data from one copy to another
+      1. Propagate the update operations to other copies
+    * Pull vs Push
+      1. Pull - clients pulls updates for replicas
+      1. Push - server pushes updates to replicas
+* Consistency protocols
+  * Primary based protocols - each data item _x_ in the data store has an associated primary server which is responsible for writes on _x_.
+  * Replicated write protocols - write operations are carried on multiple replicas. There are two categories - if write operations are forwarded to all replicas, or the protocol is based on majority voting.
+    * Active replication - write operations are sent to each replica. Does not scale well.
+    * Quorum-based replication - a replica must agree with majority of other replicas before doing an operation.
+  * Cache-coherence protocols
