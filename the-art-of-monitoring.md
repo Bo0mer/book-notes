@@ -1,6 +1,5 @@
 # The art of monitoring
-by James Turnbull. If you like this notes, you can [buy the book]
-(https://www.amazon.com/Art-Monitoring-James-Turnbull-ebook/dp/B01GU387MS).
+by James Turnbull. If you like this notes, you can [buy the book](https://www.amazon.com/Art-Monitoring-James-Turnbull-ebook/dp/B01GU387MS).
 
 
 **Types of monitoring across the industry**
