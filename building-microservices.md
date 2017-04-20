@@ -1,4 +1,5 @@
-## Building Microservices: Designing Fine-Grained Systems by Sam Newman. If you like this notes, you can [buy the book](https://www.amazon.com/Building-Microservices-Designing-Fine-Grained-Systems/dp/1491950358).  ### Testing
+## Building Microservices: Designing Fine-Grained Systems by Sam Newman. If you like this notes, you can [buy the book](https://www.amazon.com/Building-Microservices-Designing-Fine-Grained-Systems/dp/1491950358).
+
 
 ### Testing
 * [The testing pyramid](https://martinfowler.com/bliki/TestPyramid.html)
