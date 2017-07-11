@@ -145,3 +145,48 @@ the following rules:
 * Accuracy
     * Strong - no correct process is suspected ever
     * Weak - some correct process is never suspected
+
+### Chapter 4: Replication
+
+* Synchronous replication
+    * As fast as the slowest node
+    * Can not tolerate node failure
+    * Highly durable data
+* Asynchronous replication
+    * Fast
+    * Can tolerate up to n-1 node failures
+    * Only weak or probabilistic durability guarantees
+* Replication without divergence (single-copy replication)
+    * With `1n` messages - async primary/backup
+    * With `2n` messages - sync primary/backup
+    * With `4n` messages - 2-phase commit, multi-Paxos
+    * With `6n` messages - 3-phase commit, Paxos with repeated leader election
+* Replication with divergence
+
+Concrete implementations of replication algorithms
+* Primary/backup replication
+    * Asynchronous (1n messages - only update message)
+    * Synchronous (2n messages - update + acknowledge messages)
+    * Has single static master
+    * Has replicated log, slaves are not involved in executing operations
+    * No bounds on replication delay
+    * Not partition tolerant - e.g. susceptible to split-brain
+    * Provides only best-effort durability guarantee
+* Two phase commit
+    * Unanimous vote: commit or abort
+    * Has single static master
+    * Can not survive simultaneous failure of the master (coordinator) and a
+      node during a commit phase
+    * Latency sensitive
+    * Not partition tolerant
+* Majority-based partition tolerant algorithms (e.g. Paxos)
+    * Rely on odd number of nodes
+    * Nodes may have roles - e.g. master and slave
+    * Operates in epochs
+        * One leader per epoch
+        * Epochs are actually logical clocks - they allow to identify outdated
+          nodes
+    * Relies on majority voting
+    * Dynamic master
+    * Robust to `n/2 - 1` failures as part of protocol
+    * Less sensitive to tail latency
