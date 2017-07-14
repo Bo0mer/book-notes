@@ -190,3 +190,26 @@ Concrete implementations of replication algorithms
     * Dynamic master
     * Robust to `n/2 - 1` failures as part of protocol
     * Less sensitive to tail latency
+
+### Chapter 5: Replication: Weak consistency model protocols
+
+* Weak consistency (does not enforce single-copy)
+    * Replicas can diverge from each other
+
+There are two types of system design
+* Eventual consistency with probabilistic guarantees
+    * Does not guarantee that the results are equivalent to some correct
+      sequential execution - anomalies can occur
+* Eventual consistency with strong guarantees
+    * Results converge to a common value, equivalent to some correct sequential
+      execution - no anomalies can occur
+        * CRDTs - data types that guarantee convergence to the same value in
+          spite of network delays, partitions and message reordering. Covers
+          limited data types - they need to support associate, commutative and
+          idempotent operations. Known as join or meet semilattices in maths.
+        * CALM theorem - if something is logically monotonic, then it is also
+          safe to run without coordination
+
+Non-monotonicity is related to expensive operations in Distributed Systems. Both
+distributed aggregation and coordination protocols can be considered a form of
+negation (thus they are hard).
