@@ -4,11 +4,12 @@ by Andrew S. Tanenbaum, Maarten van Steen. If you like this notes, you can
 
 ### Chapter 1: Introduction
 
-1. What is a distributed system?
+1. **What is a distributed system?**
 > A distributed system is a collection of autonomus computing elements that
 > appear to its users as a single coherent system.
 
-1. Design goals
+2. **Design goals**
+
 A distributed system should
 * Support resource sharing - it should be easy for users and applications to
   access and share remote resources.
